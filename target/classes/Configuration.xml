@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration>
+    <TENEXCH>
+        <browser>Firefox</browser>
+        <envName>dev</envName>
+        <userName>Kabir4</userName>
+        <password>Mail1234</password>
+        <username_locator>xpath===//input[@placeholder='Username']</username_locator>
+        <password_locator>xpath===//input[@placeholder='Enter password']</password_locator>
+        <button_locator>xpath===//*[contains(text(),"ogin")]</button_locator>
+    </TENEXCH>
+
+    <Environment_URl>
+        <dev>http://tenexch.com/login</dev>
+    </Environment_URl>
+</Configuration>
+
+

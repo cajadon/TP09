@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+<suite name="Test Classes" parallel="tests" thread-count="1">
+    <listeners>
+        <listener class-name="org.uncommons.reportng.HTMLReporter" />
+        <listener class-name="org.uncommons.reportng.JUnitXMLReporter" />
+    </listeners>
+
+    <test name="Application Basic Test">
+        <classes>
+            <class name="com.tinpatiti.automation.homepage.Worker" />
+                <!--<methods>
+                    <include name="TC_01_Verify_edit_vehicle_details_functionality"></include>
+                </methods>-->
+        </classes>
+    </test>
+</suite>

@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration>
+    <DataBaseConfig>
+        <QaAws>jdbc:postgresql://dbpath:5432/dbname</QaAws>
+        <QaAwsUserName>username</QaAwsUserName>
+        <QaAwsPassword>password</QaAwsPassword>
+    </DataBaseConfig>
+</Configuration>
