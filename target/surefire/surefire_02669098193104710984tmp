@@ -1,7 +1,0 @@
-#surefire_0
-#Sat Aug 15 21:43:38 IST 2020
-basedir=C\:\\Users\\ianub\\OneDrive\\Documents\\GitHub\\TP09
-testSuiteFile=TestExecution.xml
-skipSurefireReport=true
-user.dir=C\:\\Users\\ianub\\OneDrive\\Documents\\GitHub\\TP09
-localRepository=C\:\\Users\\ianub\\.m2\\repository

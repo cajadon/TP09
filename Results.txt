@@ -1,10 +1,10 @@
-201508224640
-15-08-20
-22:46:40
- A
-Q of hearts
-8 of hearts
+201608000824
+16-08-20
+00:08:24
+ B
+2 of spades
+K of clubs
 10 of diamonds
-Q of spades
 6 of spades
-2 of hearts
+9 of spades
+A of spades
