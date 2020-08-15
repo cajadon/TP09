@@ -278,7 +278,7 @@ public class Worker extends InitializeResource {
                     cardsB[j - 1] = cardName;
                     System.out.println(cardName);
                 }
-                takeSnapShot(getWebDriver(), "F:\\Poker_work\\Selenium\\Screenshots\\Sc" + i + ".PNG");
+                takeSnapShot(getWebDriver(), "C:\\TINPATTI\\Screenshots\\Sc" + i + ".PNG");
 
                 writer.writeData(roundID, date, time, winner, cardsA, cardsB);
                 sheet.callSheets();
