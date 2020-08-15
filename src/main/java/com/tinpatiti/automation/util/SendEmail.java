@@ -6,7 +6,7 @@ import java.io.InputStreamReader;
 public class SendEmail {
     public void sendEmail(){
 
-        String command = "cmd /c python Notifications.py";
+        String command = "cmd /c python Notification.py";
         try{
             Process p = Runtime.getRuntime().exec(command);
             p.waitFor();
@@ -26,7 +26,7 @@ public class SendEmail {
 
             p.destroy();
         }catch (Exception e){
-            System.out.println("hi");
+            System.out.println("Exception occur");
         }
 
 
