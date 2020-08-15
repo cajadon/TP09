@@ -1,7 +1,6 @@
 import gspread
 from oauth2client.service_account import ServiceAccountCredentials
-from robot.api.deco import keyword
-from robot.api import logger
+
 
 
 # use creds to create a client to interact with the Google Drive API

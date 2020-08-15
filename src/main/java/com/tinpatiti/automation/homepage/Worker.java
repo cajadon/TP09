@@ -151,7 +151,7 @@ public class Worker extends InitializeResource {
         Scanner myReader = new Scanner(resultFile);
         String preRoundID = myReader.nextLine();
         LOGGER.info("prevRoundID:"+ preRoundID);
-        String newRoundID = null;
+        String newRoundID = "";
         driver.navigate().refresh();
 
         int tableIndex = getTableRow(preRoundID, driver, LOGGER);
@@ -228,9 +228,7 @@ public class Worker extends InitializeResource {
 
             while (true) {
                 LOGGER.info("Entered in While loop");
-                //getWebDriver().get("http://tenexch.com/teenpatti/twentytwenty");
-                //String parentWindowHandler =  getWebDriver().getWindowHandle(); // Store your parent window
-                //String subWindowHandler = null;
+
                 getWebDriver().get("http://tenexch.com/casinoresult/2020teenpatti");
                 LOGGER.info("Opened Result page");
                 roundID = getRoundID(getWebDriver(), LOGGER);
