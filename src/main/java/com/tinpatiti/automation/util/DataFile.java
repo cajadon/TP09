@@ -14,7 +14,7 @@ import java.io.IOException;
 
 public class DataFile {
     
-    public void writeData(String roundID, String date, String time, String winner, String[] cardsA, String[] cardsB){
+    public void writeData(String roundID, String date, String time, String winner, String[] cardsA, String deckOfA, String[] cardsB, String deckOfB){
       try {
             //File myObj = new File("C:\\filename.txt");
             FileWriter myWriter = new FileWriter("Results.txt");
@@ -28,6 +28,8 @@ public class DataFile {
             myWriter.write(cardsB[0]+"\n");
             myWriter.write(cardsB[1]+"\n");
             myWriter.write(cardsB[2]+"\n");
+            myWriter.write(deckOfA+"\n");
+            myWriter.write(deckOfB+"\n");
             myWriter.close();
             System.out.println("Successfully wrote to the file.");
         } catch (IOException e) {
