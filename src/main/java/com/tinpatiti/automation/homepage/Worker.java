@@ -327,7 +327,7 @@ public class Worker extends InitializeResource {
 
                     //SeleniumUtil.getElementAfterLoaded()
 
-                    String cardName = cardReader(src);
+                    String cardName = cardReader(src); 
                     cardsA[j - 1] = cardName;
                     System.out.println(cardName);
                 }
