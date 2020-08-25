@@ -212,16 +212,80 @@ public class Worker extends InitializeResource {
         return hour + ":" + minute + ":" + second;
     }
 
-    public void startProcess(DataFile writer, SendEmail notify) throws Exception {
+    public static String getConclusion(String[] cards){
+        String conclusion = "High Card";
+        ArrayList<String> colorCards = new ArrayList<String>();
+        ArrayList<Integer> numberCards = new ArrayList<Integer>();
+        String numberOfTheCard;
+        boolean color = false;
+        boolean sequence = false;
+        for(int i = 0;i<3;i++){
+            numberOfTheCard = cards[i].substring(0,2).trim();
+            switch (numberOfTheCard){
+                case "A":
+                    numberCards.add(i,1);
+                    break;
+                case "K":
+                    numberCards.add(i,13);
+                    break;
+                case "Q":
+                    numberCards.add(i,12);
+                    break;
+                case "J":
+                    numberCards.add(i,11);
+                    break;
+                default:
+                    numberCards.add(Integer.parseInt(numberOfTheCard));
+            }
+        }
+        for(int i = 0;i<3;i++){
+            int startIndex = cards[i].lastIndexOf("f");
+            colorCards.add(cards[i].substring(startIndex));
+        }
+
+        if(numberCards.get(0) == numberCards.get(1)){
+            if(numberCards.get(1) == numberCards.get(2)){
+                conclusion = "Trail";
+            }
+            else{
+                conclusion = "Pair";
+            }
+        }
+        int diff1 = Math.abs(numberCards.get(0) - numberCards.get(1));
+        int diff2 = Math.abs(numberCards.get(1) - numberCards.get(2));
+        int diff3 = Math.abs(numberCards.get(2) - numberCards.get(0));
+        if((diff1 == 1 && diff2 ==1) || (diff2 == 1 && diff3 ==1) || (diff3 == 1 && diff1 ==1)){
+            conclusion = "Sequence";
+            sequence = true;
+        }
+        if(numberCards.contains(1) && numberCards.contains(13) && numberCards.contains(12)){
+            conclusion = "Sequence";
+            sequence = true;
+        }
+        if(colorCards.get(0).equals(colorCards.get(1))){
+            if(colorCards.get(1).equals(colorCards.get(2))){
+                conclusion = "Color";
+                color = true;
+            }
+        }
+        if (color == true && sequence == true){
+            conclusion = "Colored-Sequence";
+        }
+        return conclusion;
+    }
+
+    public void startProcess(DataFile writer) throws Exception {
 
         try {
             LOGGER.info("Entered in try block");
-            UpdateDataSheet sheet = new UpdateDataSheet();
-
+            //UpdateDataSheet sheet = new UpdateDataSheet();
+            Sheets sheet = new Sheets();
             int i = 0;
             String roundID = null;
             String[] cardsA = new String[3];
             String[] cardsB = new String[3];
+            String deckOfA = null;
+            String deckOfB = null;
             String date = null;
             String time = null;
             String winner = null;
@@ -264,35 +328,33 @@ public class Worker extends InitializeResource {
                     //SeleniumUtil.getElementAfterLoaded()
 
                     String cardName = cardReader(src);
-                    System.out.println(cardName);
                     cardsA[j - 1] = cardName;
                     System.out.println(cardName);
                 }
+                deckOfA = getConclusion(cardsA);
                 for (int j = 1; j <= 3; j++) {
                     WebElement element = SeleniumUtil.getElementAfterLoaded(getWebDriver(),"xpath===//div[@class='col text-center']//img[" + j + "]");
                     String src = readImage(getWebDriver(), element);
-
                     String cardName = cardReader(src);
                     cardsB[j - 1] = cardName;
                     System.out.println(cardName);
                 }
+                deckOfB = getConclusion(cardsB);
                 takeSnapShot(getWebDriver(), "C:\\TINPATTI\\Screenshots\\Sc" + i + ".PNG");
 
-                writer.writeData(roundID, date, time, winner, cardsA, cardsB);
-                sheet.callSheets();
-                //SeleniumUtil.click(getWebDriver(), getWebDriverWait(), getProps().getProperty("closeResultLocator"));
+                writer.writeData(roundID, date, time, winner, cardsA, deckOfA, cardsB, deckOfB);
+                sheet.updateSheet();
 
-                //getWebDriver().switchTo().window(parentWindowHandler);  // switch back to parent window
                 getWebDriver().navigate().refresh();
-                //getWebDriverWait().until(waitForTextToChange(element, currentText));
+
                 SeleniumUtil.explicitWait(5000);
                 i++;
             }
 
         } catch (Exception e) {
             writer.writeException(e.getMessage());
-            notify.sendEmail();
-            startProcess(writer, notify);
+            //notify.sendEmail();
+            startProcess(writer);
 
 //        notify.sendEmail();
 
@@ -325,9 +387,9 @@ public class Worker extends InitializeResource {
     }.getClass().getEnclosingMethod().getName();
     LOGGER.info("The TestCase Executing is : " + testCaseName);
     CustomReport.reporter("The TestCase Executing is : " + testCaseName);
-    SendEmail notify = new SendEmail();
+    //SendEmail notify = new SendEmail();
     DataFile writer = new DataFile();
-    startProcess(writer, notify);
+    startProcess(writer);
 
 }
     @AfterClass(alwaysRun = true)

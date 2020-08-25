@@ -1,18 +1,12 @@
 package com.tinpatiti.automation.base;
 
 import com.tinpatiti.automation.constants.ApplicationConstants;
-import com.tinpatiti.automation.util.CustomReport;
 import com.tinpatiti.automation.util.SeleniumUtil;
-import com.tinpatiti.automation.util.SendEmail;
 import com.tinpatiti.util.ReadResources;
 import org.apache.log4j.Logger;
-import org.openqa.selenium.By;
 import org.openqa.selenium.TimeoutException;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.WebDriverWait;
-import org.openqa.selenium.firefox.FirefoxDriver;
-import java.util.List;
+
 import java.util.Random;
 import java.util.concurrent.TimeUnit;
 
@@ -28,8 +22,8 @@ public class InitializeResource extends TestBase {
 	public void userLogin(final String userName, final String password, final long timeout,
 			final long pollingFrequency) throws InterruptedException {
 		//try {
-			SendEmail notify = new SendEmail();
-			notify.sendEmail();
+//			SendEmail notify = new SendEmail();
+//			notify.sendEmail();
 			LOGGER.info("Waiting for page");
 			Thread.sleep(12000);
 			//SeleniumUtil.waitForElementPresence(getWebDriverWait(),getProps().getProperty("userNameLocator"));
