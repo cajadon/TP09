@@ -68,7 +68,7 @@ public class Worker extends InitializeResource {
     }
 
     public static void openResults(WebDriver driver, WebDriverWait driverWait, String locator, Logger LOGGER) throws InterruptedException {
-        LOGGER.info("Entered in the openResults function");
+        //LOGGER.info("Entered in the openResults function");
         driver.get("http://tenexch.com/casinoresult/2020teenpatti");
         Thread.sleep(10000);
         try{
@@ -110,12 +110,12 @@ public class Worker extends InitializeResource {
     public static int getTableRow(String preRoundID, WebDriver driver, Logger LOGGER) throws InterruptedException {
         String reqRoundID = null;
         int tableIndex = 0;
-        LOGGER.info("Entered in getTableRow function");
+        //LOGGER.info("Entered in getTableRow function");
         Thread.sleep(10000);
         List<WebElement> rows = driver.findElements(By.xpath("//table[@id='casinoResultReport']/tbody/tr"));
         //List<WebElement> rows = driver.findElements(By.tagName("tr"));
         int count = rows.size();
-        LOGGER.info("row Count: "+count);
+        //LOGGER.info("row Count: "+count);
         if (count>10){
             count = 11;
         }
@@ -125,14 +125,14 @@ public class Worker extends InitializeResource {
 
 
             if(reqRoundID.isEmpty()){
-                LOGGER.info("Entered in if(empty) block of getTableRow function");
+                //LOGGER.info("Entered in if(empty) block of getTableRow function");
                 driver.get("http://tenexch.com/casinoresult/2020teenpatti");
                 Thread.sleep(15000);
                 getTableRow(preRoundID,driver,LOGGER);
             }
-            LOGGER.info("reqRoundID: "+reqRoundID);
+            //LOGGER.info("reqRoundID: "+reqRoundID);
             if(preRoundID.equals(reqRoundID)){
-                LOGGER.info("Entered in if(req) condition of getTableRow function");
+                //LOGGER.info("Entered in if(req) condition of getTableRow function");
                 tableIndex =  i-1;
                 break;
             }
@@ -143,23 +143,23 @@ public class Worker extends InitializeResource {
         return tableIndex;
     }
     public static String getRoundID(WebDriver driver, Logger LOGGER) throws InterruptedException, FileNotFoundException {
-        LOGGER.info("Entered in getRoundID function");
+        //LOGGER.info("Entered in getRoundID function");
 
         driver.get("http://tenexch.com/casinoresult/2020teenpatti");
         Thread.sleep(15000);
         File resultFile = new File("Results.txt");
         Scanner myReader = new Scanner(resultFile);
         String preRoundID = myReader.nextLine();
-        LOGGER.info("prevRoundID:"+ preRoundID);
+        //LOGGER.info("prevRoundID:"+ preRoundID);
         String newRoundID = "";
         driver.navigate().refresh();
 
         int tableIndex = getTableRow(preRoundID, driver, LOGGER);
-        LOGGER.info("TableIndex: "+tableIndex);
+        //LOGGER.info("TableIndex: "+tableIndex);
         if(tableIndex>0 && tableIndex<10){
             newRoundID = driver.findElement(By.xpath("//div[@class='table-responsive col-sm-12']//tr["+tableIndex+"]//td[1]")).getText();
-            LOGGER.info(newRoundID);
-            LOGGER.info("Entered in first if condition of getroundID");
+            //LOGGER.info(newRoundID);
+            //LOGGER.info("Entered in first if condition of getroundID");
             return newRoundID;
         }
         else if(tableIndex==10){
@@ -169,7 +169,7 @@ public class Worker extends InitializeResource {
         else{
             getRoundID(driver,LOGGER);
         }
-        LOGGER.info(newRoundID);
+        //LOGGER.info(newRoundID);
         return newRoundID;
     }
 
@@ -277,7 +277,7 @@ public class Worker extends InitializeResource {
     public void startProcess(DataFile writer) throws Exception {
 
         try {
-            LOGGER.info("Entered in try block");
+            //LOGGER.info("Entered in try block");
             //UpdateDataSheet sheet = new UpdateDataSheet();
             Sheets sheet = new Sheets();
             int i = 0;
@@ -291,10 +291,10 @@ public class Worker extends InitializeResource {
             String winner = null;
 
             while (true) {
-                LOGGER.info("Entered in While loop");
+                //LOGGER.info("Entered in While loop");
 
                 getWebDriver().get("http://tenexch.com/casinoresult/2020teenpatti");
-                LOGGER.info("Opened Result page");
+                //LOGGER.info("Opened Result page");
                 roundID = getRoundID(getWebDriver(), LOGGER);
                 System.out.println("roundId from getRoundID function"+roundID);
                 date = getDate(roundID);
@@ -304,21 +304,21 @@ public class Worker extends InitializeResource {
                 System.out.println(time);
                 Thread.sleep(4000);
                 String resultLocator = "xpath===//span[contains(text(),'"+roundID+"')]";
-                LOGGER.info(resultLocator);
+                //LOGGER.info(resultLocator);
                 //Winner = getWinner();
                 String WinnerLocator = resultLocator+ "/../../../following-sibling::td";
                 winner = SeleniumUtil.getElementText(getWebDriver(), WinnerLocator);
                 winner = winner.substring(6,8);
-                LOGGER.info("Winner: ");
+                //LOGGER.info("Winner: ");
                 System.out.println(winner);
 
                 //SeleniumUtil.click(getWebDriverWait(), getWebDriver(),resultLocator);
                 openResults(getWebDriver(), getWebDriverWait(), resultLocator, LOGGER);
-                LOGGER.info("Results Opened");
+                //LOGGER.info("Results Opened");
 
 
                 for (int j = 1; j <= 3; j++) {
-                    LOGGER.info("Entered in first for loop");
+                    //LOGGER.info("Entered in first for loop");
                     SeleniumUtil.explicitWait(10000);
 
 
@@ -327,7 +327,7 @@ public class Worker extends InitializeResource {
 
                     //SeleniumUtil.getElementAfterLoaded()
 
-                    String cardName = cardReader(src); 
+                    String cardName = cardReader(src);
                     cardsA[j - 1] = cardName;
                     System.out.println(cardName);
                 }
@@ -371,7 +371,7 @@ public class Worker extends InitializeResource {
             launchURL(new Object() {
             }.getClass().getName());
             applicationUtilities = new ApplicationUtilities();
-            LOGGER.info("in beforeClass");
+            //LOGGER.info("in beforeClass");
             userLogin(getUserName(), getPassword());
 
         } catch (Exception e) {
@@ -385,7 +385,7 @@ public class Worker extends InitializeResource {
     public void worker() throws Exception {
     testCaseName = new Object() {
     }.getClass().getEnclosingMethod().getName();
-    LOGGER.info("The TestCase Executing is : " + testCaseName);
+    //LOGGER.info("The TestCase Executing is : " + testCaseName);
     CustomReport.reporter("The TestCase Executing is : " + testCaseName);
     //SendEmail notify = new SendEmail();
     DataFile writer = new DataFile();
