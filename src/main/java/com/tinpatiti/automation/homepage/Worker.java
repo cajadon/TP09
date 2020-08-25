@@ -328,19 +328,18 @@ public class Worker extends InitializeResource {
                     //SeleniumUtil.getElementAfterLoaded()
 
                     String cardName = cardReader(src);
-                    System.out.println(cardName);
                     cardsA[j - 1] = cardName;
                     System.out.println(cardName);
-                    deckOfA = getConclusion(cardsA);
                 }
+                deckOfA = getConclusion(cardsA);
                 for (int j = 1; j <= 3; j++) {
                     WebElement element = SeleniumUtil.getElementAfterLoaded(getWebDriver(),"xpath===//div[@class='col text-center']//img[" + j + "]");
                     String src = readImage(getWebDriver(), element);
                     String cardName = cardReader(src);
                     cardsB[j - 1] = cardName;
                     System.out.println(cardName);
-                    deckOfB = getConclusion(cardsB);
                 }
+                deckOfB = getConclusion(cardsB);
                 takeSnapShot(getWebDriver(), "C:\\TINPATTI\\Screenshots\\Sc" + i + ".PNG");
 
                 writer.writeData(roundID, date, time, winner, cardsA, deckOfA, cardsB, deckOfB);

@@ -76,17 +76,6 @@ public class Sheets {
         // Build a new authorized API client service.
         Hashtable<String, Integer> sheet_columns = new Hashtable<String, Integer>();
 
-//        sheet_columns.put("Serial No.", 1);
-//        sheet_columns.put("Date", 2);
-//        sheet_columns.put("Time", 3);
-//        sheet_columns.put("Round ID", 4);
-//        sheet_columns.put("CardsA[0]", 5);
-//        sheet_columns.put("CardsA[1]", 6);
-//        sheet_columns.put("CardsA[2]", 7);
-//        sheet_columns.put("CardsB[0]", 8);
-//        sheet_columns.put("CardsB[1]", 9);
-//        sheet_columns.put("CardsB[2]", 10);
-//        sheet_columns.put("Winner", 11);
         File f = new File("Results.txt");
         Scanner reader = new Scanner(f);
         String roundID = reader.nextLine();
@@ -123,20 +112,5 @@ public class Sheets {
                         .setValueInputOption("USER_ENTERED")
                         .execute();
         System.out.printf("%d cells appended.", result.getUpdates().getUpdatedCells());
-
-
-
-
-//        ValueRange appendBody = new ValueRange()
-//                .setValues(Arrays.asList(
-//                        Arrays.asList(lastserialNumber+1)
-//                        ));
-//        AppendValuesResponse appendResult = service.spreadsheets().values()
-//                .append(spreadsheetId, "A3:K3", appendBody)
-//                .setValueInputOption("USER_ENTERED")
-//                .setInsertDataOption("INSERT_ROWS")
-//                .setIncludeValuesInResponse(true)
-//                .execute();
-
     }
 }
