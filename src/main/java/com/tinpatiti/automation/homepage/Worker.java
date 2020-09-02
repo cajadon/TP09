@@ -242,19 +242,20 @@ public class Worker extends InitializeResource {
             int startIndex = cards[i].lastIndexOf("f");
             colorCards.add(cards[i].substring(startIndex));
         }
+        Collections.sort(numberCards);
+        int diff1 = Math.abs(numberCards.get(0) - numberCards.get(1));
+        int diff2 = Math.abs(numberCards.get(1) - numberCards.get(2));
+        int diff3 = Math.abs(numberCards.get(2) - numberCards.get(0));
 
-        if(numberCards.get(0) == numberCards.get(1)){
-            if(numberCards.get(1) == numberCards.get(2)){
+        if(diff1 == 0 || diff2 == 0){
+            if(diff3 == 0){
                 conclusion = "Trail";
             }
             else{
                 conclusion = "Pair";
             }
         }
-        int diff1 = Math.abs(numberCards.get(0) - numberCards.get(1));
-        int diff2 = Math.abs(numberCards.get(1) - numberCards.get(2));
-        int diff3 = Math.abs(numberCards.get(2) - numberCards.get(0));
-        if((diff1 == 1 && diff2 ==1) || (diff2 == 1 && diff3 ==1) || (diff3 == 1 && diff1 ==1)){
+        if(diff1 == 1 && diff2 ==1 && diff3 ==2){
             conclusion = "Sequence";
             sequence = true;
         }
@@ -273,7 +274,6 @@ public class Worker extends InitializeResource {
         }
         return conclusion;
     }
-
     public void startProcess(DataFile writer) throws Exception {
 
         try {
