@@ -1,12 +1,10 @@
-202508195127
-25-08-20
-19:51:27
+201808205145
+18-08-20
+20:51:45
  A
-8 of hearts
-A of hearts
-6 of diamonds
+K of spades
+10 of hearts
+J of diamonds
 8 of spades
-J of clubs
-4 of hearts
-High Card
-High Card
+9 of spades
+Q of hearts
