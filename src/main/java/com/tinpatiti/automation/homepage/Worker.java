@@ -111,7 +111,7 @@ public class Worker extends InitializeResource {
         String reqRoundID = null;
         int tableIndex = 0;
         //LOGGER.info("Entered in getTableRow function");
-        Thread.sleep(10000);
+        Thread.sleep(15000);
         List<WebElement> rows = driver.findElements(By.xpath("//table[@id='casinoResultReport']/tbody/tr"));
         //List<WebElement> rows = driver.findElements(By.tagName("tr"));
         int count = rows.size();
